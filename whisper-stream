@@ -475,9 +475,13 @@ function handle_exit() {
         echo $'\e[0;36m'Transcription copied to clipboard.$'\e[0m'
       fi
       ;;
-    Linux)
+  Linux)
+    # if $accumulated_text is not empty
+    if [ -n "$accumulated_text" ]; then
       echo "$accumulated_text" | xclip -selection clipboard >&1
-      ;;
+      echo $'\e[0;36m'Transcription copied to clipboard.$'\e[0m'
+    fi
+    ;;
     CYGWIN*|MINGW32*|MSYS*|MINGW*)
       # This is a rough guess that you're on Windows Subsystem for Linux
       # if $accumulated_text is not empty
